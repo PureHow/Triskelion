@@ -12,3 +12,9 @@
 */
 
 Route::get('/', 'IndexController@show');
+
+Route::post('login', 'Auth\LoginController@postLogin');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('session', 'SessionController@show');
+});
