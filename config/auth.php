@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Triskelion\User::class,
+            'model' => Triskelion\Models\User::class,
         ],
 
         // 'users' => [

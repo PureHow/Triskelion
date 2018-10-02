@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => Triskelion\User::class,
+        'model' => Triskelion\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
