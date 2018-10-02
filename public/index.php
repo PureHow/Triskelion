@@ -9,6 +9,15 @@
 
 define('LARAVEL_START', microtime(true));
 
+/**
+ * Triskelion Constants
+ *
+ * @author	PureHow <purehow@purehow.com>
+ *
+ */
+
+require __DIR__.'/../constants.php';
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
