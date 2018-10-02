@@ -5,6 +5,7 @@ namespace Triskelion\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'code', 'name', 'mobile', 'email', 'password',
+        'code', 'name', 'mobile', 'email', 'password', 'active',
     ];
 
     /**
@@ -27,4 +28,47 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected function generateCode (int $length = 32)
+    {
+        return str_random($length);
+    }
+
+    public function register (array $userData)
+    {
+        $user = self::create($userData);
+
+        return $user;
+    }
+
+    public function getUserByCode (string $code)
+    {
+        $user = self::where('code', $code)->take(1)->firstOrFail();
+
+        return $user;
+    }
+
+    public function getUserByMobile (string $mobile)
+    {
+        if (empty($mobile)) {
+            // Throw a instants of ModelNotFoundException
+            throw new ModelNotFoundException('Mobile must not be a empty string.');
+        }
+
+        $user = self::where('mobile', $mobile)->take(1)->firstOrFail();
+
+        return $user;
+    }
+
+    public function getUserByEmail (string $email)
+    {
+        if (empty($email)) {
+            // Throw a instants of ModelNotFoundException
+            throw new ModelNotFoundException('Email must not be a empty string.');
+        }
+
+        $user = self::where('email', $email)->take(1)->firstOrFail();
+
+        return $user;
+    }
 }
