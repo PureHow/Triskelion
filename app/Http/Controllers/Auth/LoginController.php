@@ -54,12 +54,12 @@ class LoginController extends Controller
                 case 'email':
                     // login by email
                     $userInfo = $auth->loginByEmail($credentials['username'], $credentials['password']);
-                    Log::info("User {$userInfo['code']} login success, email: $email.");
+                    Log::info("User {$userInfo['code']} login success, email: {$credentials['username']}.");
                     break;
                 case 'mobile':
                     // login by mobile
                     $userInfo = $auth->loginByMobile($credentials['username'], $credentials['password']);
-                    Log::info("User {$userInfo['code']} login success, mobile: $mobile.");
+                    Log::info("User {$userInfo['code']} login success, mobile: {$credentials['username']}.");
                     break;
                 default:
                     throw new TriskelionException("Bad login username: $username", USER_BAD_USERNAME);

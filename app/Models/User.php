@@ -36,6 +36,7 @@ class User extends Authenticatable
 
     public function register (array $userData)
     {
+        $userData['code'] = $this->generateCode();
         $user = self::create($userData);
 
         return $user;

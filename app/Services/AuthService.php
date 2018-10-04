@@ -26,6 +26,14 @@ class AuthService extends BaseService implements AuthContract
             if ($user->active != 1) {
                 throw new TriskelionException("Login failed, email: $email.", USER_LOCKED);
             }
+            $creditials = [
+                'email' => $email,
+                'password' => $password,
+            ];
+            if (!Auth::attempt($creditials)) {
+                Log::error("User password wrong, email: $email.", [$e]);
+                throw new TriskelionException("Login failed, email: $email.", USER_WRONG_PASSWORD);
+            }
         } catch (ModelNotFoundException $e) {
             Log::error("User not found, email: $email.", [$e]);
             throw new TriskelionException("Login failed, email: $email.", USER_NOT_FOUND);
@@ -40,6 +48,14 @@ class AuthService extends BaseService implements AuthContract
             $user = $this->user->getUserByMobile($mobile);
             if ($user->active != 1) {
                 throw new TriskelionException("Login failed, mobile: $mobile.", USER_LOCKED);
+            }
+            $creditials = [
+                'mobile' => $mobile,
+                'password' => $password,
+            ];
+            if (!Auth::attempt($creditials)) {
+                Log::error("User password wrong, mobile: $mobile.", [$e]);
+                throw new TriskelionException("Login failed, mobile: $mobile.", USER_WRONG_PASSWORD);
             }
         } catch (ModelNotFoundException $e) {
             Log::error("User not found, mobile: $mobile.", [$e]);
