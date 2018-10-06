@@ -25,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $this->app->bind('Triskelion\Contracts\AuthContract', 'Triskelion\Services\AuthService');
+        $this->app->bind('Triskelion\Contracts\UserContract', 'Triskelion\Services\UserService');
     }
 }

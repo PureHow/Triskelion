@@ -42,6 +42,13 @@ class User extends Authenticatable
         return $user;
     }
 
+    public function getUserById (int $id)
+    {
+        $user = self::findOrFail($id);
+
+        return $user;
+    }
+
     public function getUserByCode (string $code)
     {
         $user = self::where('code', $code)->take(1)->firstOrFail();
