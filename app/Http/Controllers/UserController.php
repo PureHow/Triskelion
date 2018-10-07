@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Triskelion\Contracts\UserContract;
 use Triskelion\Exceptions\TriskelionException;
 use Exception;
+use Log;
 
 class UserController extends Controller
 {

@@ -6,6 +6,7 @@ use Auth;
 use Triskelion\Contracts\UserContract;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Triskelion\Models\User;
+use Triskelion\Exceptions\TriskelionException;
 use Log;
 
 class UserService extends BaseService implements UserContract
