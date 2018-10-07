@@ -16,7 +16,7 @@ define('LARAVEL_START', microtime(true));
  *
  */
 
-require __DIR__.'/../constants.php';
+require_once __DIR__.'/../constants.php';
 
 /*
 |--------------------------------------------------------------------------

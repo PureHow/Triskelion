@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Triskelion Constants
+ *
+ * @author	PureHow <purehow@purehow.com>
+ *
+ */
+
+require_once __DIR__.'/../constants.php';
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
