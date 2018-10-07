@@ -41,4 +41,64 @@ class UserTest extends TestCase
             User::truncate();
         }
     }
+
+    public function testModelGetUserByMobile ()
+    {
+        try {
+            $users = factory(User::class, 3)->make();
+            foreach ($users as $user) {
+                $user->save();
+
+                $currentUser = $user->getUserByMobile($user->mobile);
+                $currentUser === $user ?? $this->assertTrue(false);
+            }
+
+            $this->assertTrue(true);
+        } catch (Exception $e) {
+            Log::error('Test failed!', [$e]);
+            $this->assertTrue(false);
+        } finally {
+            User::truncate();
+        }
+    }
+
+    public function testModelGetUserByCode ()
+    {
+        try {
+            $users = factory(User::class, 3)->make();
+            foreach ($users as $user) {
+                $user->save();
+
+                $currentUser = $user->getUserByCode($user->code);
+                $currentUser === $user ?? $this->assertTrue(false);
+            }
+
+            $this->assertTrue(true);
+        } catch (Exception $e) {
+            Log::error('Test failed!', [$e]);
+            $this->assertTrue(false);
+        } finally {
+            User::truncate();
+        }
+    }
+
+    public function testModelGetUserById ()
+    {
+        try {
+            $users = factory(User::class, 3)->make();
+            foreach ($users as $user) {
+                $user->save();
+
+                $currentUser = $user->getUserById($user->id);
+                $currentUser === $user ?? $this->assertTrue(false);
+            }
+
+            $this->assertTrue(true);
+        } catch (Exception $e) {
+            Log::error('Test failed!', [$e]);
+            $this->assertTrue(false);
+        } finally {
+            User::truncate();
+        }
+    }
 }
