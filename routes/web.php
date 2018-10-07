@@ -19,4 +19,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('session', 'SessionController@show');
 
     Route::get('user/{code}', 'UserController@show');
+    Route::post('user', 'UserController@create');
 });

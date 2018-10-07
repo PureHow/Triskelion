@@ -18,6 +18,11 @@ class UserService extends BaseService implements UserContract
         $this->user = $user;
     }
 
+    protected function generatePassword (int $length = 32)
+    {
+        return str_random($length);
+    }
+
     public function getSession ()
     {
         $userId = Auth::user()->id;
@@ -43,6 +48,20 @@ class UserService extends BaseService implements UserContract
             Log::error("User not found, code: $code.", [$e]);
             throw new TriskelionException("Get user info failed, code: $code.", USER_NOT_FOUND);
         }
+
+        return $user->toArray();
+    }
+
+    public function createUser(array $userData)
+    {
+        if (!array_key_exists('mobile', $userData)) {
+            $userData['mobile'] = '';
+        }
+
+        $userData['active'] = 0;
+        $userData['password'] = $this->generatePassword();
+
+        $user = $this->user->register($userData);
 
         return $user->toArray();
     }
