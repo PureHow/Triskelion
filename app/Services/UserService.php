@@ -6,6 +6,7 @@ use Auth;
 use Triskelion\Contracts\UserContract;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Triskelion\Models\User;
+use Log;
 
 class UserService extends BaseService implements UserContract
 {
@@ -31,5 +32,17 @@ class UserService extends BaseService implements UserContract
         }
 
         return $ret;
+    }
+
+    public function getUserInfo(string $code)
+    {
+        try {
+            $user = $this->user->getUserByCode($code);
+        } catch (ModelNotFoundException $e) {
+            Log::error("User not found, code: $code.", [$e]);
+            throw new TriskelionException("Get user info failed, code: $code.", USER_NOT_FOUND);
+        }
+
+        return $user->toArray();
     }
 }
