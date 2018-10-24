@@ -64,4 +64,9 @@ class AuthService extends BaseService implements AuthContract
 
         return $user->toArray();
     }
+
+    public function logout()
+    {
+        Auth::logout();
+    }
 }

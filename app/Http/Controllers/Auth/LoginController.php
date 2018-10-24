@@ -89,4 +89,19 @@ class LoginController extends Controller
         return $ret;
     }
 
+    public function postLogout (AuthContract $auth)
+    {
+        try {
+            $auth->logout();
+            $ret = ['code' => SYS_STATUS_OK];
+        } catch (Exception $e) {
+            Log::error('Login failed.', [$e]);
+            $ret = [
+                'code' => SYS_STATUS_ERROR_UNKNOW,
+                'message' => 'Unknow Exception.',
+            ];
+        }
+
+        return $ret;
+    }
 }
